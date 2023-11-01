@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+Disallow: /drafts/
+Sitemap: https://trifunovski.me/sitemap.xml

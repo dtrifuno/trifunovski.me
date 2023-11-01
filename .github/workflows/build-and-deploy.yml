@@ -1,0 +1,39 @@
+name: Build and deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          registry-url: 'https://registry.yarnpkg.com'
+      - run: yarn install
+      - run: yarn build
+      - run: ls -la out
+      - run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.ssh_private_key }}" > ~/.ssh/deploy_key
+          sudo chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.host }}" > ~/.ssh/known_hosts
+      - run:
+          sftp -i ~/.ssh/deploy_key ${{ secrets.deploy_user }}@${{ secrets.host
+          }} <<< $'cd ${{ secrets.destination_path }} \n put -r out/*'

@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  color: var(--tw-prose-links);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+  a {
+    color: var(--tw-prose-invert-links);
+  }
+}
+
+/* LaTeX */
+
+@import 'katex/dist/katex.min.css';
+
+.katex {
+  font-size: 1.15rem;
+}
+
+.katex-display .katex-html {
+  font-size: 0.7rem;
+}
+
+@media only screen and (min-width: 500px) {
+  .katex-display .katex-html {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .katex-display .katex-html {
+    font-size: 1.15rem;
+  }
+}
+
+.katex-display {
+  padding: 0.5em 0;
+  overflow-x: auto;
+}
+
+/* Syntax Highlighting */
+
+@import 'nord-light-prism-theme/prism-nord-light.css';
+@import 'nord-prism-theme/prism-nord.css' (prefers-color-scheme: dark);
+
+.prose :where(pre) {
+  font-style: normal !important;
+}
