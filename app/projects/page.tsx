@@ -32,8 +32,8 @@ const projects: Project[] = [
         <a href="https://arxiv.org/abs/2104.10402">
           PTHash minimal perfect hashing
         </a>
-        . Used to generate static hash tables at compile time backed by perfect
-        hash functions, which are smaller and faster than conventional hash
+        . Used to generate static hash tables at compile time which use perfect
+        hash functions, making them smaller and faster than conventional hash
         tables. It is twice as fast at lookup, and more than 10 times as fast at
         constructing a perfect hash function compared to{' '}
         <a href="https://crates.io/crates/phf">phf</a>.
@@ -46,8 +46,8 @@ const projects: Project[] = [
     description: (
       <>
         Rust crate for faster division and modulo operations by a fixed divisor,
-        by replacing division operations with an equivalent, but computationally
-        cheaper, sequence of multiplications and bitshifts.
+        by replacing division operations with a numerically equivalent, but
+        computationally cheaper, sequence of multiplications and bitshifts.
       </>
     ),
     url: 'https://github.com/dtrifuno/quickdiv',
@@ -56,10 +56,10 @@ const projects: Project[] = [
     title: 'Ipsum',
     description: (
       <>
-        Python library for generating placeholder text that resembles modern
+        Python library for generating placeholder text based on modern
         languages. It uses Markov chains trained on large corpora of texts to
         create output that is meaningless, but typographically resembles
-        languages that designers might be targeting today.
+        languages that designers are targeting today.
       </>
     ),
     url: 'https://ipsum.trifunovski.me',
@@ -76,7 +76,7 @@ const projects: Project[] = [
         individual player performance.
       </>
     ),
-    url: 'trifunovski.me/pdf/gsu2022.pdf',
+    url: '/pdf/gsu2022.pdf',
   },
 ]
 
